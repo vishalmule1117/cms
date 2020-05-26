@@ -3,7 +3,7 @@ const router = express.Router();
 const Post = require('../../models/Post');
 
 router.all('/*', (req,res,next)=>{
-    req.app.locals.layout = 'admin';
+    req.app.locals.layout = 'admin'; 
     next();
 });
 
@@ -13,8 +13,7 @@ router.get('/', (req,res) => {
         res.render('admin/posts', {posts: posts});
     }).catch(error => {
         console.log('Cant Create Posts Because...' + error)
-    });;
-
+    });
 });
 
 router.get('/create', (req,res)=>{
@@ -30,7 +29,7 @@ router.post('/create', (req,res)=>{
         allowComments = false;
     }
 
-    const newPost = new Post({
+    const newPost =  Post({
         title:req.body.title,
         status:req.body.status,
         allowComments: allowComments,
@@ -45,7 +44,7 @@ router.post('/create', (req,res)=>{
 });
 
 router.get('/edit/:id', (req,res)=>{
-    Post.findOne({id:req.param.id}).then(post=> {
+    Post.findOne({_id: req.params.id}).then(post=> {
         res.render('admin/posts/edit', {post: post});
     });
 });

@@ -4,8 +4,8 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const Handlebars = require('handlebars');
 
 mongoose.connect('mongodb://localhost:27017/cms',{useUnifiedTopology:true,useNewUrlParser:true}).then(db=>{
     console.log('Mongo Connected')
@@ -23,12 +23,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 
-//Load Routs
+//Load Routes
 const home = require('./routes/home/index');
 const admin = require('./routes/admin/index');
 const  posts = require('./routes/admin/posts');
 
-// USe Routs
+// USe Routes
 app.use('/', home);
 app.use('/admin', admin);
 app.use('/admin/posts', posts);
